@@ -55,26 +55,10 @@ public class MainActivity extends AppCompatActivity {
 
 
             if(beginLeft == 1){
-                if(mstoryIndexTop == 3 && mstoryIndexBottom == 1){
-                    endTop();
-                }else if(mstoryIndexTop >=2 && mstoryIndexBottom >1){
-                    endBottom();
-                }
-                else{
-                    updateAllText(progressLeft);
-                }
+                leftDirection();
+
             }else if(beginRight == 1){
-                if(mstoryIndexTop == 1 && mstoryIndexBottom == 2){
-                    updateAllText(progressRight);
-                }else if (mstoryIndexBottom == 2 && mstoryIndexTop == 2){
-                    updateAllText(progressRight);
-                }else if(mstoryIndexTop ==1 && mstoryIndexBottom >2){
-                    endT4();
-                }else if (mstoryIndexTop == 3 && mstoryIndexBottom == 2){
-                    endTop();
-                }else if(mstoryIndexBottom ==3 && mstoryIndexTop == 2){
-                    endBottom();
-                }
+                rightDirection();
 
             }
 
@@ -91,10 +75,10 @@ public class MainActivity extends AppCompatActivity {
                 if(beginRight == 0 && beginLeft >= 0){
                     beginLeft = 1;
                     beginRight = 0;
-                    updateTopStory(beginLeft,beginRight);
+                    updateStory(beginLeft,beginRight);
                 }else{
 
-                    updateTopStory(beginLeft,beginRight);
+                    updateStory(beginLeft,beginRight);
                 }
 
 
@@ -115,9 +99,9 @@ public class MainActivity extends AppCompatActivity {
                 if(beginLeft ==0 && beginRight >=0){
                     beginRight =1;
                     beginLeft = 0;
-                    updateTopStory(beginLeft,beginRight);
+                    updateStory(beginLeft,beginRight);
                 }else {
-                    updateTopStory(beginLeft,beginRight);
+                    updateStory(beginLeft,beginRight);
                 }
 
                     }
@@ -126,38 +110,45 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void updateTopStory(int beginLeft, int beginRight){
+    private void updateStory(int beginLeft, int beginRight){
 
         progressLeft = (progressLeft +1)% questionBank.length;
         progressRight = (progressRight +1)% questionBank.length;
         if(beginLeft == 1){
-
-            if(mstoryIndexTop == 3 && mstoryIndexBottom == 1){
-                endTop();
-            }else if(mstoryIndexTop >=2 && mstoryIndexBottom >1){
-                endBottom();
-            }
-            else{
-                updateAllText(progressLeft);
-            }
+            leftDirection();
         }else if(beginRight == 1){
-            if(mstoryIndexTop == 1 && mstoryIndexBottom == 2){
-                updateAllText(progressRight);
-            }else if (mstoryIndexBottom == 2 && mstoryIndexTop == 2){
-                updateAllText(progressRight);
-            }else if(mstoryIndexTop ==1 && mstoryIndexBottom >2){
-                endT4();
-            }else if (mstoryIndexTop == 3 && mstoryIndexBottom == 2){
-                endTop();
-            }else if(mstoryIndexBottom ==3 && mstoryIndexTop == 2){
-                endBottom();
-            }
-
+                rightDirection();
         }
 
 
 
 
+    }
+
+    //left direction
+    private void leftDirection(){
+        if(mstoryIndexTop == 3 && mstoryIndexBottom == 1){
+            endTop();
+        }else if(mstoryIndexTop >=2 && mstoryIndexBottom >1){
+            endBottom();
+        }
+        else{
+            updateAllText(progressLeft);
+        }
+    }
+    //begin in right direction
+    private void rightDirection(){
+        if(mstoryIndexTop == 1 && mstoryIndexBottom == 2){
+            updateAllText(progressRight);
+        }else if (mstoryIndexBottom == 2 && mstoryIndexTop == 2){
+            updateAllText(progressRight);
+        }else if(mstoryIndexTop ==1 && mstoryIndexBottom >2){
+            endT4();
+        }else if (mstoryIndexTop == 3 && mstoryIndexBottom == 2){
+            endTop();
+        }else if(mstoryIndexBottom ==3 && mstoryIndexTop == 2){
+            endBottom();
+        }
     }
 
     //end T4
@@ -192,6 +183,8 @@ public class MainActivity extends AppCompatActivity {
         bottomButton.setVisibility(View.GONE);
     }
 
+
+    //saving the state
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
